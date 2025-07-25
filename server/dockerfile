@@ -16,8 +16,11 @@ COPY . .
 # สร้าง Prisma Client
 RUN npx prisma generate
 
-# เปิดพอร์ตให้เข้าถึง Express ได้
+# คอมไพล์ TypeScript
+RUN npm run build
+
+# เปิดพอร์ต
 EXPOSE 3001
 
-# คำสั่งให้ Docker รันเมื่อ container เริ่มทำงาน
-CMD ["node", "index.js"]
+# รันไฟล์ index.js ที่ build แล้ว
+CMD ["node", "dist/index.js"]
