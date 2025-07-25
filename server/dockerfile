@@ -1,0 +1,23 @@
+# ใช้ Node.js รุ่นเบา
+FROM node:18-alpine
+
+# สร้าง working directory
+WORKDIR /app
+
+# คัดลอกไฟล์สำหรับติดตั้ง dependency
+COPY package.json package-lock.json ./
+
+# ติดตั้ง dependencies
+RUN npm install
+
+# คัดลอกไฟล์ทั้งหมดเข้า image
+COPY . .
+
+# สร้าง Prisma Client
+RUN npx prisma generate
+
+# เปิดพอร์ตให้เข้าถึง Express ได้
+EXPOSE 3001
+
+# คำสั่งให้ Docker รันเมื่อ container เริ่มทำงาน
+CMD ["node", "index.js"]

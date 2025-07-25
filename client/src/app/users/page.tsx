@@ -14,8 +14,9 @@ const Users = () => {
   const { data: users, isError, isLoading } = useGetUsersQuery();
 
   if (isLoading) {
-    return <div className="py-4">Loading ... </div>;
+    return <div className="py-4">Loading...</div>;
   }
+
   if (isError || !users) {
     return (
       <div className="text-center text-red-500 py-4">Failed to fetch users</div>
@@ -35,4 +36,5 @@ const Users = () => {
     </div>
   );
 };
+
 export default Users;
